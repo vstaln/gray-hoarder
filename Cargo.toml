@@ -1,0 +1,17 @@
+[package]
+name = "gray-hoarder"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT"
+description = "Archive session transcripts to a content-addressed local hoard on turn_end (port of pi-session-hoarder)"
+
+[[bin]]
+name = "gray-hoarder"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = "1"
+
+[profile.release]
+strip = true
