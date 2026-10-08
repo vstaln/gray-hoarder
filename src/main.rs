@@ -1,8 +1,7 @@
 //! gray-hoarder — archive every session transcript into a local,
 //! content-addressed hoard.
 //!
-//! Behavior-level port of @moyai/pi-session-hoarder (Apache-2.0), reduced to
-//! its core promise: on every `turn_end` notification the sidecar finds the
+//! On every `turn_end` notification the sidecar finds the
 //! session transcript under `~/.gray/sessions/`, SHA-256s its bytes, stores
 //! them once at `~/.gray/hoarder/objects/<sha>` (existing objects are
 //! skipped), and appends `{ts,session_id,cwd,sha,bytes}` to
