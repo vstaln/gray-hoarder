@@ -25,6 +25,7 @@ fn manifest() -> Value {
         "tools": [],
         "description": "archive session transcripts to a local hoard",
         "commands": ["/hoard"],
+        "command_descriptions": {"/hoard": "browse archived session transcripts"},
     })
 }
 
