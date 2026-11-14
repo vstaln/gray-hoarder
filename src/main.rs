@@ -23,7 +23,7 @@ fn manifest() -> Value {
         "version": env!("CARGO_PKG_VERSION"),
         "protocol": "1.1",
         "tools": [],
-        "description": "archive",
+        "description": "archive session transcripts to a local hoard",
         "commands": ["/hoard"],
     })
 }
