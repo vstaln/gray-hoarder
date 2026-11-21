@@ -97,7 +97,9 @@ fn now_iso() -> String {
 /// caller — this returns a Result only to make the happy path readable.
 fn archive_in(home: &Path, session_id: &str, cwd: &str) -> std::io::Result<()> {
     let hoard = home.join("hoarder");
-    let Some(src) = find_transcript_in(&home.join("sessions"), session_id) else { return Ok(()) };
+    let Some(src) = find_transcript_in(&home.join("sessions"), session_id) else {
+        return Ok(());
+    };
     let bytes = std::fs::read(&src)?;
     if bytes.is_empty() {
         return Ok(());
@@ -179,7 +181,11 @@ fn hoard_show(sha_prefix: &str) -> String {
         return format!("no object matching {sha_prefix}");
     }
     let obj = &matches[0];
-    let sha = obj.file_name().and_then(|n| n.to_str()).unwrap_or("?").to_string();
+    let sha = obj
+        .file_name()
+        .and_then(|n| n.to_str())
+        .unwrap_or("?")
+        .to_string();
     let mut out = format!("object {sha}\n{}", obj.display());
     for e in index_entries().iter().rev() {
         if e.get("sha").and_then(Value::as_str) == Some(sha.as_str()) {
@@ -262,7 +268,9 @@ fn main() -> std::io::Result<()> {
     let mut stdout = std::io::stdout();
     for line in stdin.lock().lines() {
         let line = line?;
-        let Ok(req) = serde_json::from_str::<Value>(&line) else { continue };
+        let Ok(req) = serde_json::from_str::<Value>(&line) else {
+            continue;
+        };
         let (reply, exit) = handle(&req);
         if let Some(reply) = reply {
             writeln!(stdout, "{reply}")?;
@@ -280,7 +288,9 @@ mod tests {
     use super::*;
 
     fn call(method: &str, params: Value) -> Value {
-        handle(&json!({ "id": 1, "method": method, "params": params })).0.unwrap()
+        handle(&json!({ "id": 1, "method": method, "params": params }))
+            .0
+            .unwrap()
     }
 
     #[test]
